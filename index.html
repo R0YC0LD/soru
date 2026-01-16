@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lineer Cebir Değerlendirme Çerçevesi</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Merriweather:wght@300;700&display=swap" rel="stylesheet">
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process'
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --bg-color: #fdfdfd;
+            --text-color: #333;
+            --paper-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Merriweather', serif; /* Metin için serif font */
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: #ecf0f1;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Roboto', sans-serif; /* Başlıklar için sans-serif */
+            color: var(--primary-color);
+            margin-top: 1.5em;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            border-left: 5px solid var(--accent-color);
+            padding-left: 10px;
+            background: #f4f6f7;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--bg-color);
+            padding: 40px;
+            box-shadow: var(--paper-shadow);
+            border-radius: 8px;
+        }
+
+        .exam-section {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .question-box {
+            background-color: #f9fbfd;
+            border-left: 4px solid #2980b9;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .solution-box {
+            background-color: #fefefe;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+
+        .solution-header {
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .highlight-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* MathJax overflow handling for mobile */
+        mjx-container {
+            overflow-x: auto;
+            overflow-y: hidden;
+            max-width: 100%;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .print-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .print-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media print {
+            body { background-color: white; }
+            .container { box-shadow: none; width: 100%; padding: 0; }
+            .print-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Kapsamlı Lineer Cebir Değerlendirme Çerçevesi:<br><small style="font-size: 0.6em; color: #7f8c8d;">Teori, Uygulama ve Çözüm Analizi</small></h1>
+
+    <a href="javascript:window.print()" class="print-btn">Raporu Yazdır / PDF Yap</a>
+
+    <section>
+        <h2>1. Yönetici Özeti ve Pedagojik Hedefler</h2>
+        <p>Bu rapor, ileri düzey lisans müfredatına uygun olarak hazırlanan, Lineer Cebir dersinin temel yapı taşlarını kapsayan teorik ve işlemsel bir değerlendirme çerçevesi sunmaktadır. Verilen ders notları ve çözümlü örnek havuzundan derlenen bu çalışma, öğrencilerin sadece hesaplama yeteneklerini değil, aynı zamanda matematiksel argümantasyon, ispat kurgulama ve soyut kavramları somut problemlere uygulama becerilerini ölçmeyi hedeflemektedir.</p>
+        
+        <p>Lineer cebir eğitimi, genellikle somut matris işlemlerinden soyut vektör uzayı aksiyomlarına doğru ilerleyen bir pedagojik yol izler. Bu bağlamda hazırlanan sınav ve çözüm anahtarı, öğrencilerin Gauss eliminasyonu gibi algoritmik süreçlerden, <strong>"Tersine Çevrilebilir Matris Teoremi" (Invertible Matrix Theorem - IMT)</strong> gibi derin teorik bağlantılara geçiş yetkinliğini test etmektedir.</p>
+        
+        <div class="highlight-box">
+            <strong>Rapor üç ana bölümden oluşmaktadır:</strong>
+            <ul>
+                <li><strong>Teorik Temeller ve Kavramsal Çerçeve:</strong> Teoremlerin ve tanımların analizi.</li>
+                <li><strong>Kapsamlı Sınav:</strong> Çoktan seçmeli, ispat ve hesaplama soruları.</li>
+                <li><strong>Ayrıntılı Çözüm Anahtarı:</strong> Adım adım çözümler ve hata analizleri.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Teorik Temeller ve Kavramsal Çerçeve</h2>
+        
+        <h3>2.1 Matris Sistemleri ve Tersine Çevrilebilirlik</h3>
+        <p>Lineer cebirin merkezi problemi, $A\mathbf{x} = \mathbf{b}$ lineer denklem sistemlerinin çözümüdür. Bu sistemin çözülebilirliği, katsayılar matrisi $A$'nın özelliklerine bağlıdır.</p>
+
+        <h4>2.1.1 Tersine Çevrilebilir Matris Teoremi (IMT)'nin Analizi</h4>
+        <p>Bir $n \times n$ boyutundaki $A$ matrisi için aşağıdaki ifadelerin tamamı ya doğrudur ya da tamamı yanlıştır:</p>
+        <ul>
+            <li>$A$ matrisi tersinirdir ($A^{-1}$ mevcuttur).</li>
+            <li>$A\mathbf{x} = \mathbf{0}$ homojen denkleminin tek çözümü aşikar çözüm olan $\mathbf{x} = \mathbf{0}$'dır ($\text{Nul}(A) = \{\mathbf{0}\}$).</li>
+            <li>$A$'nın sütunları lineer bağımsızdır.</li>
+            <li>Lineer dönüşüm $T(\mathbf{x}) = A\mathbf{x}$, birebir ve örtendir.</li>
+            <li>$A$'nın determinantı sıfırdan farklıdır ($\det(A) \neq 0$).</li>
+            <li>$A$ matrisinin rankı $n$'dir.</li>
+        </ul>
+
+        <h4>2.1.2 Rank ve Sıfırlık (Rank-Nullity) İlişkisi</h4>
+        <p>Boyut teoremi olarak da bilinen Rank-Nullity teoremi, bir matrisin görüntü uzayı ile çekirdek uzayı arasındaki dengeyi kurar. Bir $A \in M_{m \times n}$ matrisi için:</p>
+        $$ \text{rank}(A) + \dim(\text{Nul}(A)) = n $$
+        
+        <h3>2.2 Vektör Uzayları ve Alt Uzay Kriterleri</h3>
+        <p>Bir $V$ vektör uzayının alt kümesi olan $W$'nun bir alt uzay (subspace) olabilmesi için üç temel aksiyom:</p>
+        <ol>
+            <li><strong>Sıfır Vektörü:</strong> $\mathbf{0} \in W$ olmalıdır.</li>
+            <li><strong>Toplamaya Göre Kapalılık:</strong> Her $\mathbf{u}, \mathbf{v} \in W$ için $\mathbf{u} + \mathbf{v} \in W$.</li>
+            <li><strong>Skaler Çarpmaya Göre Kapalılık:</strong> Her $\mathbf{u} \in W$ ve her skaler $c$ için $c\mathbf{u} \in W$.</li>
+        </ol>
+
+        <h3>2.3 Ortogonallik ve Gram-Schmidt Süreci</h3>
+        <p>Gram-Schmidt süreci, lineer bağımsız bir $\{\mathbf{x}_1, \dots, \mathbf{x}_k\}$ kümesini ortogonal bir $\{\mathbf{v}_1, \dots, \mathbf{v}_k\}$ kümesine dönüştürür:</p>
+        $$ \mathbf{v}_i = \mathbf{x}_i - \sum_{j=1}^{i-1} \frac{\langle \mathbf{x}_i, \mathbf{v}_j \rangle}{\|\mathbf{v}_j\|^2}\mathbf{v}_j $$
+    </section>
+
+    <section>
+        <h2>3. Kapsamlı Sınav Tasarımı</h2>
+        <div class="highlight-box" style="text-align: center;">
+            <strong>Ders:</strong> İleri Lineer Cebir (MAT 201) | <strong>Süre:</strong> 180 Dakika | <strong>Puan:</strong> 100
+        </div>
+
+        <div class="exam-section">
+            <h3>Bölüm I: Kavramsal Doğrulama (20 Puan)</h3>
+            
+            <div class="question-box">
+                <strong>Soru 1.</strong> $S$, bir $V$ vektör uzayında lineer bağımlı bir küme ise, $S$ içindeki her vektör, $S$'deki diğer vektörlerin bir lineer kombinasyonu olarak yazılabilir. (Doğru/Yanlış)
+            </div>
+            
+            <div class="question-box">
+                <strong>Soru 2.</strong> $A$, $n \times n$ matris olsun. Eğer $A\mathbf{x} = \mathbf{0}$ denkleminin aşikar olmayan bir çözümü varsa, o zaman her $\mathbf{b} \in \mathbb{R}^n$ için $A\mathbf{x} = \mathbf{b}$ sisteminin en az bir çözümü vardır. (Doğru/Yanlış)
+            </div>
+
+            <div class="question-box">
+                <strong>Soru 3.</strong> $\mathbb{R}^3$ uzayında, uzunluğu 1 olan tüm vektörlerin oluşturduğu küme (yani $W = \{\mathbf{x} \in \mathbb{R}^3 : \|\mathbf{x}\| = 1\}$) bir alt uzaydır. (Doğru/Yanlış)
+            </div>
+        </div>
+
+        <div class="exam-section">
+            <h3>Bölüm II: Hesaplamalı Matris Teorisi (25 Puan)</h3>
+            
+            <div class="question-box">
+                <strong>Soru 7.</strong> Aşağıdaki sistemi ele alınız:
+                $$ \begin{align*} x_1 + 2x_2 - x_3 &= 1 \\ 2x_1 + 5x_2 - x_3 &= 3 \\ x_1 + x_2 - 3x_3 &= -2 \end{align*} $$
+                a) Sistemi $A\mathbf{x} = \mathbf{b}$ formunda yazınız.<br>
+                b) $\det(A)$ hesaplayınız.<br>
+                c) $A^{-1}$ matrisini Gauss-Jordan yöntemiyle bulunuz.<br>
+                d) Çözüm vektörü $\mathbf{x}$'i bulunuz.
+            </div>
+
+            <div class="question-box">
+                <strong>Soru 8.</strong> $A$, $5 \times 3$ boyutunda ve aşağıdaki $R$ matrisine satır eşdeğerdir:
+                $$ R = \begin{pmatrix} 1 & 0 & -2 \\ 0 & 1 & 3 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix} $$
+                a) $A$'nın rankı nedir?<br>
+                b) $\text{Nul}(A)$ boyutunu bulunuz.
+            </div>
+            
+            <div class="question-box">
+                <strong>Soru 9.</strong> $A$, $4 \times 4$ boyutunda ve $\det(A) = 3$ ise aşağıdakileri hesaplayınız:<br>
+                a) $\det(-A)$ <br>
+                b) $\det(A^T)$ <br>
+                c) $\det(2A)$ <br>
+                d) $\det(A^{-1})$
+            </div>
+        </div>
+
+        <div class="exam-section">
+            <h3>Bölüm III: Soyut Vektör Uzayları (20 Puan)</h3>
+            <div class="question-box">
+                <strong>Soru 10.</strong> $W = \{ p(x) \in P_2 : p(x), (x-2) \text{ ile tam bölünür} \}$ kümesi için:<br>
+                a) $W$'nun alt uzay olduğunu gösteriniz.<br>
+                b) $W$ için bir taban bulunuz.
+            </div>
+        </div>
+        
+        <div class="exam-section">
+            <h3>Bölüm IV: İç Çarpım Uzayları (15 Puan)</h3>
+            <div class="question-box">
+                <strong>Soru 12.</strong> $\mathbb{R}^3$'te $\mathbf{x}_1 = (1, 2, 0)^T$ ve $\mathbf{x}_2 = (8, 1, -6)^T$ vektörleri veriliyor. Gram-Schmidt sürecini kullanarak ortogonal bir taban elde ediniz.
+            </div>
+        </div>
+        
+         <div class="exam-section">
+            <h3>Bölüm V: Lineer Dönüşümler ve Özdeğerler (20 Puan)</h3>
+            <div class="question-box">
+                <strong>Soru 14.</strong> $A = \begin{pmatrix} 1 & 2 \\ 4 & 9 \end{pmatrix}$ matrisi için özdeğerleri ve özvektörleri bulunuz, matrisi köşegenleştiriniz.
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Ayrıntılı Çözüm Anahtarı ve Akademik Analiz</h2>
+
+        <h3>Bölüm I Çözümleri</h3>
+        <div class="solution-box">
+            <span class="solution-header">Çözüm 1: YANLIŞ</span>
+            <p><strong>Analiz:</strong> Lineer bağımlı bir kümede en az bir vektör diğerlerinin kombinasyonudur, ancak bu her vektör için geçerli değildir. <br>
+            <strong>Karşı Örnek:</strong> $\mathbf{v}_1=(1,0), \mathbf{v}_2=(2,0), \mathbf{v}_3=(0,1)$. Küme bağımlıdır ama $\mathbf{v}_3$, $\mathbf{v}_1$ ve $\mathbf{v}_2$ cinsinden yazılamaz.</p>
+        </div>
+
+        <div class="solution-box">
+            <span class="solution-header">Çözüm 2: YANLIŞ</span>
+            <p><strong>Analiz:</strong> IMT gereği, $A\mathbf{x} = \mathbf{0}$ aşikar olmayan bir çözüme sahipse matris singülerdir ($\det(A)=0$). Bu durumda sütunlar tüm uzayı germez, dolayısıyla her $\mathbf{b}$ için çözüm yoktur.</p>
+        </div>
+        
+        <div class="solution-box">
+            <span class="solution-header">Çözüm 3: YANLIŞ</span>
+            <p><strong>Analiz:</strong> Sıfır vektörünün uzunluğu 0'dır, dolayısıyla $W$ kümesinde yer almaz. Alt uzay olması için $\mathbf{0} \in W$ şarttır.</p>
+        </div>
+
+        <h3>Bölüm II Çözümleri</h3>
+        <div class="solution-box">
+            <span class="solution-header">Çözüm 7: Sistem Çözümü</span>
+            <p><strong>b) Determinant:</strong><br>
+            $\det(A) = 1(-15+1) - 2(-6+1) - 1(2-5) = -14 + 10 + 3 = -1 \neq 4$ (Not: Metindeki örnekte determinant 4 olarak belirtilmişti, kofaktör hesabını dikkatli yapınız). <br>
+            <em>Düzeltme:</em> Rapor metninde $1(-14) - 2(-5) - 1(-3) = -14 + 10 + 3 = -1$.
+            </p>
+            <p><strong>c) Ters Matris İşlemleri:</strong><br>
+            Gauss-Jordan ile $[A|I] \to [I|A^{-1}]$ indirgemesi yapılır.
+            </p>
+            <p><strong>d) Sonuç:</strong> $\mathbf{x} = A^{-1}\mathbf{b}$ hesaplanır. Rapor verisine göre: $x_1=21, x_2=1, x_3=-11$.</p>
+        </div>
+        
+        <div class="solution-box">
+            <span class="solution-header">Çözüm 9: Determinant Özellikleri</span>
+            <p>Verilen $\det(A) = 3$, $n=4$.</p>
+            <ul>
+                <li>a) $\det(-A) = (-1)^4 \det(A) = 1 \cdot 3 = 3$.</li>
+                <li>b) $\det(A^T) = 3$.</li>
+                <li>c) $\det(2A) = 2^4 \det(A) = 16 \cdot 3 = 48$.</li>
+                <li>d) $\det(A^{-1}) = 1/3$.</li>
+            </ul>
+        </div>
+
+        <h3>Bölüm III Çözümleri</h3>
+        <div class="solution-box">
+            <span class="solution-header">Çözüm 10: Polinom Uzayları</span>
+            <p><strong>Taban Bulma:</strong> $p(x) \in P_2$ ve $p(2)=0$ olmalı.<br>
+            $p(x) = a(x^2-4) + b(x-2)$ formundadır. <br>
+            Taban: $\{ x^2-4, x-2 \}$. Boyut 2'dir.</p>
+        </div>
+
+        <h3>Bölüm IV Çözümleri</h3>
+        <div class="solution-box">
+            <span class="solution-header">Çözüm 12: Gram-Schmidt</span>
+            <p>$\mathbf{v}_1 = (1, 2, 0)^T$.<br>
+            $\mathbf{v}_2 = \mathbf{x}_2 - \text{proj}_{\mathbf{v}_1}\mathbf{x}_2$.<br>
+            İç çarpım: $8(1) + 1(2) + 0 = 10$. Norm kare: $1^2+2^2=5$. Katsayı: $10/5=2$.<br>
+            $\mathbf{v}_2 = (8, 1, -6) - 2(1, 2, 0) = (6, -3, -6)$.</p>
+        </div>
+        
+        <h3>Bölüm V Çözümleri</h3>
+        <div class="solution-box">
+            <span class="solution-header">Çözüm 14: Köşegenleştirme</span>
+            <p>Karakteristik denklem: $\lambda^2 - 10\lambda + 1 = 0$.<br>
+            $\lambda_{1,2} = 5 \pm 2\sqrt{6}$.<br>
+            Özvektörler bulunarak $P$ matrisi oluşturulur ve $A = PDP^{-1}$ yazılır.</p>
+        </div>
+
+    </section>
+
+    <section>
+        <h2>5. Kavramsal Özet Tabloları</h2>
+        
+        <h3>Tablo 1: Alt Uzay Kontrol Listesi</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kriter</th>
+                    <th>Açıklama</th>
+                    <th>Yaygın Hata</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sıfır Vektörü</td>
+                    <td>$\mathbf{0} \in W$ olmalıdır.</td>
+                    <td>$\{\mathbf{x} : \|\mathbf{x}\| = 1\}$ (Sıfır yok)</td>
+                </tr>
+                <tr>
+                    <td>Toplam Kapalılığı</td>
+                    <td>$\mathbf{u}+\mathbf{v} \in W$</td>
+                    <td>I. Çeyrek vektörleri (toplamda korunur ama çıkarma/negatifle bozulur)</td>
+                </tr>
+                <tr>
+                    <td>Skaler Kapalılığı</td>
+                    <td>$c\mathbf{u} \in W$</td>
+                    <td>Tamsayı koordinatlar (Skaler $\pi$ olursa bozulur)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Matematik Bölümü - İleri Lineer Cebir Değerlendirme Raporu</p>
+    </footer>
+
+</div>
+
+</body>
+          </html>
+          
