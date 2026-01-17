@@ -3,424 +3,706 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lineer Cebir Değerlendirme Çerçevesi</title>
+    <title>Genel Kimya I - Final Hazırlık ve Çözüm Platformu</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Merriweather:wght@300;700&display=swap" rel="stylesheet">
-
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script>
-    MathJax = {
+    window.MathJax = {
       tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true
-      },
-      options: {
-        ignoreHtmlClass: 'tex2jax_ignore',
-        processHtmlClass: 'tex2jax_process'
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
       }
     };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #34495e;
-            --accent-color: #3498db;
-            --bg-color: #fdfdfd;
-            --text-color: #333;
-            --paper-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
         }
 
         body {
-            font-family: 'Merriweather', serif; /* Metin için serif font */
-            line-height: 1.8;
-            color: var(--text-color);
-            background-color: #ecf0f1;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            padding: 0;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Roboto', sans-serif; /* Başlıklar için sans-serif */
-            color: var(--primary-color);
-            margin-top: 1.5em;
-        }
-
-        h1 {
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 1rem;
             text-align: center;
-            font-size: 2.5rem;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
-            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
-        h2 {
-            border-left: 5px solid var(--accent-color);
-            padding-left: 10px;
-            background: #f4f6f7;
-            padding: 10px;
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 1rem auto 0;
         }
 
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: var(--bg-color);
-            padding: 40px;
-            box-shadow: var(--paper-shadow);
-            border-radius: 8px;
+            max-width: 1100px;
+            margin: -30px auto 2rem;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 10;
         }
 
-        .exam-section {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
-        .question-box {
-            background-color: #f9fbfd;
-            border-left: 4px solid #2980b9;
-            padding: 15px;
-            margin-bottom: 20px;
+        .nav-link {
+            background: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
         }
 
-        .solution-box {
-            background-color: #fefefe;
-            border: 1px solid #e0e0e0;
-            padding: 15px;
-            margin-top: 10px;
-            border-radius: 4px;
+        .nav-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
         }
 
-        .solution-header {
-            font-weight: bold;
-            color: #27ae60;
-            margin-bottom: 5px;
+        .nav-link.active {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.06);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--bg-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .formula-card {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .formula-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
             display: block;
         }
 
-        .highlight-box {
-            background-color: #fff3cd;
-            border: 1px solid #ffeeba;
-            color: #856404;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
+        .question-block {
+            margin-bottom: 3rem;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
         }
 
-        ul, ol {
-            margin-left: 20px;
+        .q-header {
+            background: #f8fafc;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        li {
-            margin-bottom: 10px;
+        .q-tag {
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
         }
 
-        table {
+        .q-body {
+            padding: 1.5rem;
+        }
+
+        .q-text {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .step {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--border-color);
+        }
+        
+        .step strong {
+            color: var(--secondary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .answer-box {
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #065f46;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            font-weight: 600;
+        }
+
+        .strategy-box {
+            margin-top: 1.5rem;
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .strategy-title {
+            color: #b45309;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .study-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            font-family: 'Roboto', sans-serif;
-            font-size: 0.95rem;
+            margin-top: 1rem;
         }
 
-        table th, table td {
-            border: 1px solid #ddd;
-            padding: 12px;
+        .study-table th {
+            text-align: left;
+            padding: 1rem;
+            background: var(--bg-color);
+            border-bottom: 2px solid var(--border-color);
+            color: var(--text-light);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .study-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        table.nomenclature {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table.nomenclature th, table.nomenclature td {
+            border: 1px solid #e2e8f0;
+            padding: 8px;
             text-align: left;
         }
-
-        table th {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        /* MathJax overflow handling for mobile */
-        mjx-container {
-            overflow-x: auto;
-            overflow-y: hidden;
-            max-width: 100%;
-        }
+        table.nomenclature th { background-color: #f1f5f9; }
 
         footer {
             text-align: center;
-            margin-top: 50px;
-            color: #7f8c8d;
+            padding: 3rem;
+            color: var(--text-light);
             font-size: 0.9rem;
-            font-family: 'Roboto', sans-serif;
-        }
-        
-        .print-btn {
-            display: block;
-            width: 200px;
-            margin: 20px auto;
-            padding: 10px;
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            font-family: 'Roboto', sans-serif;
-        }
-        
-        .print-btn:hover {
-            background-color: var(--secondary-color);
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
         }
 
-        @media print {
-            body { background-color: white; }
-            .container { box-shadow: none; width: 100%; padding: 0; }
-            .print-btn { display: none; }
+        @media (max-width: 768px) {
+            .formula-grid { grid-template-columns: 1fr; }
+            .q-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            header h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
+<header>
+    <h1>🧪 Genel Kimya I Final Rehberi</h1>
+    [cite_start]<p>Aralık 2025 PDF Analizi, 16 Sorunun Detaylı Çözümleri ve Konu Özetleri [cite: 3]</p>
+</header>
+
 <div class="container">
-    <h1>Kapsamlı Lineer Cebir Değerlendirme Çerçevesi:<br><small style="font-size: 0.6em; color: #7f8c8d;">Teori, Uygulama ve Çözüm Analizi</small></h1>
+    <div class="nav-tabs">
+        <a href="#formulas" class="nav-link">📝 Formül Kağıdı</a>
+        <a href="#solutions" class="nav-link">💡 1-16 Soru Çözümleri</a>
+        <a href="#study-plan" class="nav-link">📅 Çalışma Planı</a>
+    </div>
 
-    <a href="javascript:window.print()" class="print-btn">Raporu Yazdır / PDF Yap</a>
-
-    <section>
-        <h2>1. Yönetici Özeti ve Pedagojik Hedefler</h2>
-        <p>Bu rapor, ileri düzey lisans müfredatına uygun olarak hazırlanan, Lineer Cebir dersinin temel yapı taşlarını kapsayan teorik ve işlemsel bir değerlendirme çerçevesi sunmaktadır. Verilen ders notları ve çözümlü örnek havuzundan derlenen bu çalışma, öğrencilerin sadece hesaplama yeteneklerini değil, aynı zamanda matematiksel argümantasyon, ispat kurgulama ve soyut kavramları somut problemlere uygulama becerilerini ölçmeyi hedeflemektedir.</p>
-        
-        <p>Lineer cebir eğitimi, genellikle somut matris işlemlerinden soyut vektör uzayı aksiyomlarına doğru ilerleyen bir pedagojik yol izler. Bu bağlamda hazırlanan sınav ve çözüm anahtarı, öğrencilerin Gauss eliminasyonu gibi algoritmik süreçlerden, <strong>"Tersine Çevrilebilir Matris Teoremi" (Invertible Matrix Theorem - IMT)</strong> gibi derin teorik bağlantılara geçiş yetkinliğini test etmektedir.</p>
-        
-        <div class="highlight-box">
-            <strong>Rapor üç ana bölümden oluşmaktadır:</strong>
-            <ul>
-                <li><strong>Teorik Temeller ve Kavramsal Çerçeve:</strong> Teoremlerin ve tanımların analizi.</li>
-                <li><strong>Kapsamlı Sınav:</strong> Çoktan seçmeli, ispat ve hesaplama soruları.</li>
-                <li><strong>Ayrıntılı Çözüm Anahtarı:</strong> Adım adım çözümler ve hata analizleri.</li>
-            </ul>
-        </div>
-    </section>
-
-    <section>
-        <h2>2. Teorik Temeller ve Kavramsal Çerçeve</h2>
-        
-        <h3>2.1 Matris Sistemleri ve Tersine Çevrilebilirlik</h3>
-        <p>Lineer cebirin merkezi problemi, $A\mathbf{x} = \mathbf{b}$ lineer denklem sistemlerinin çözümüdür. Bu sistemin çözülebilirliği, katsayılar matrisi $A$'nın özelliklerine bağlıdır.</p>
-
-        <h4>2.1.1 Tersine Çevrilebilir Matris Teoremi (IMT)'nin Analizi</h4>
-        <p>Bir $n \times n$ boyutundaki $A$ matrisi için aşağıdaki ifadelerin tamamı ya doğrudur ya da tamamı yanlıştır:</p>
-        <ul>
-            <li>$A$ matrisi tersinirdir ($A^{-1}$ mevcuttur).</li>
-            <li>$A\mathbf{x} = \mathbf{0}$ homojen denkleminin tek çözümü aşikar çözüm olan $\mathbf{x} = \mathbf{0}$'dır ($\text{Nul}(A) = \{\mathbf{0}\}$).</li>
-            <li>$A$'nın sütunları lineer bağımsızdır.</li>
-            <li>Lineer dönüşüm $T(\mathbf{x}) = A\mathbf{x}$, birebir ve örtendir.</li>
-            <li>$A$'nın determinantı sıfırdan farklıdır ($\det(A) \neq 0$).</li>
-            <li>$A$ matrisinin rankı $n$'dir.</li>
-        </ul>
-
-        <h4>2.1.2 Rank ve Sıfırlık (Rank-Nullity) İlişkisi</h4>
-        <p>Boyut teoremi olarak da bilinen Rank-Nullity teoremi, bir matrisin görüntü uzayı ile çekirdek uzayı arasındaki dengeyi kurar. Bir $A \in M_{m \times n}$ matrisi için:</p>
-        $$ \text{rank}(A) + \dim(\text{Nul}(A)) = n $$
-        
-        <h3>2.2 Vektör Uzayları ve Alt Uzay Kriterleri</h3>
-        <p>Bir $V$ vektör uzayının alt kümesi olan $W$'nun bir alt uzay (subspace) olabilmesi için üç temel aksiyom:</p>
-        <ol>
-            <li><strong>Sıfır Vektörü:</strong> $\mathbf{0} \in W$ olmalıdır.</li>
-            <li><strong>Toplamaya Göre Kapalılık:</strong> Her $\mathbf{u}, \mathbf{v} \in W$ için $\mathbf{u} + \mathbf{v} \in W$.</li>
-            <li><strong>Skaler Çarpmaya Göre Kapalılık:</strong> Her $\mathbf{u} \in W$ ve her skaler $c$ için $c\mathbf{u} \in W$.</li>
-        </ol>
-
-        <h3>2.3 Ortogonallik ve Gram-Schmidt Süreci</h3>
-        <p>Gram-Schmidt süreci, lineer bağımsız bir $\{\mathbf{x}_1, \dots, \mathbf{x}_k\}$ kümesini ortogonal bir $\{\mathbf{v}_1, \dots, \mathbf{v}_k\}$ kümesine dönüştürür:</p>
-        $$ \mathbf{v}_i = \mathbf{x}_i - \sum_{j=1}^{i-1} \frac{\langle \mathbf{x}_i, \mathbf{v}_j \rangle}{\|\mathbf{v}_j\|^2}\mathbf{v}_j $$
-    </section>
-
-    <section>
-        <h2>3. Kapsamlı Sınav Tasarımı</h2>
-        <div class="highlight-box" style="text-align: center;">
-            <strong>Ders:</strong> İleri Lineer Cebir (MAT 201) | <strong>Süre:</strong> 180 Dakika | <strong>Puan:</strong> 100
-        </div>
-
-        <div class="exam-section">
-            <h3>Bölüm I: Kavramsal Doğrulama (20 Puan)</h3>
-            
-            <div class="question-box">
-                <strong>Soru 1.</strong> $S$, bir $V$ vektör uzayında lineer bağımlı bir küme ise, $S$ içindeki her vektör, $S$'deki diğer vektörlerin bir lineer kombinasyonu olarak yazılabilir. (Doğru/Yanlış)
+    <div id="formulas" class="card">
+        <h2 class="section-title">Final İçin Hayati Formüller</h2>
+        <div class="formula-grid">
+            <div class="formula-card">
+                <span class="formula-label">Çözeltiler & Gazlar</span>
+                $$M = \frac{n_{mol}}{V_{Litre}}$$
+                $$P V = n R T \quad (R = 0.08206)$$
+                $$P_i = X_i \cdot P_{toplam} \quad (X_i = \frac{n_i}{n_{toplam}})$$
             </div>
             
-            <div class="question-box">
-                <strong>Soru 2.</strong> $A$, $n \times n$ matris olsun. Eğer $A\mathbf{x} = \mathbf{0}$ denkleminin aşikar olmayan bir çözümü varsa, o zaman her $\mathbf{b} \in \mathbb{R}^n$ için $A\mathbf{x} = \mathbf{b}$ sisteminin en az bir çözümü vardır. (Doğru/Yanlış)
+            <div class="formula-card">
+                <span class="formula-label">Denge & Asit-Baz</span>
+                $$K_c = \frac{[\text{Ürünler}]}{[\text{Girenler}]}$$
+                $$K_a \cdot K_b = K_{su} = 1.0 \times 10^{-14}$$
+                $$\text{Formal Yük} = \text{Grup No} - (\text{Bağ} + \text{Nokta})$$
             </div>
 
-            <div class="question-box">
-                <strong>Soru 3.</strong> $\mathbb{R}^3$ uzayında, uzunluğu 1 olan tüm vektörlerin oluşturduğu küme (yani $W = \{\mathbf{x} \in \mathbb{R}^3 : \|\mathbf{x}\| = 1\}$) bir alt uzaydır. (Doğru/Yanlış)
+            <div class="formula-card">
+                <span class="formula-label">Elektrokimya</span>
+                $$E = E^\circ - \frac{0.0592}{n} \log Q$$
+                $$\Delta G^\circ = -nFE^\circ$$
+                $$\text{Bond Order} = \frac{\sigma + \pi}{2} \text{ (basit)}$$
             </div>
         </div>
+    </div>
 
-        <div class="exam-section">
-            <h3>Bölüm II: Hesaplamalı Matris Teorisi (25 Puan)</h3>
-            
-            <div class="question-box">
-                <strong>Soru 7.</strong> Aşağıdaki sistemi ele alınız:
-                $$ \begin{align*} x_1 + 2x_2 - x_3 &= 1 \\ 2x_1 + 5x_2 - x_3 &= 3 \\ x_1 + x_2 - 3x_3 &= -2 \end{align*} $$
-                a) Sistemi $A\mathbf{x} = \mathbf{b}$ formunda yazınız.<br>
-                b) $\det(A)$ hesaplayınız.<br>
-                c) $A^{-1}$ matrisini Gauss-Jordan yöntemiyle bulunuz.<br>
-                d) Çözüm vektörü $\mathbf{x}$'i bulunuz.
-            </div>
-
-            <div class="question-box">
-                <strong>Soru 8.</strong> $A$, $5 \times 3$ boyutunda ve aşağıdaki $R$ matrisine satır eşdeğerdir:
-                $$ R = \begin{pmatrix} 1 & 0 & -2 \\ 0 & 1 & 3 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix} $$
-                a) $A$'nın rankı nedir?<br>
-                b) $\text{Nul}(A)$ boyutunu bulunuz.
-            </div>
-            
-            <div class="question-box">
-                <strong>Soru 9.</strong> $A$, $4 \times 4$ boyutunda ve $\det(A) = 3$ ise aşağıdakileri hesaplayınız:<br>
-                a) $\det(-A)$ <br>
-                b) $\det(A^T)$ <br>
-                c) $\det(2A)$ <br>
-                d) $\det(A^{-1})$
-            </div>
-        </div>
-
-        <div class="exam-section">
-            <h3>Bölüm III: Soyut Vektör Uzayları (20 Puan)</h3>
-            <div class="question-box">
-                <strong>Soru 10.</strong> $W = \{ p(x) \in P_2 : p(x), (x-2) \text{ ile tam bölünür} \}$ kümesi için:<br>
-                a) $W$'nun alt uzay olduğunu gösteriniz.<br>
-                b) $W$ için bir taban bulunuz.
-            </div>
-        </div>
+    <div id="solutions" class="card">
+        <h2 class="section-title">PDF Soru Analizleri ve Çözümleri</h2>
         
-        <div class="exam-section">
-            <h3>Bölüm IV: İç Çarpım Uzayları (15 Puan)</h3>
-            <div class="question-box">
-                <strong>Soru 12.</strong> $\mathbb{R}^3$'te $\mathbf{x}_1 = (1, 2, 0)^T$ ve $\mathbf{x}_2 = (8, 1, -6)^T$ vektörleri veriliyor. Gram-Schmidt sürecini kullanarak ortogonal bir taban elde ediniz.
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 1: İyon Derişimleri [cite: 4]</span>
+                <span class="q-tag">Çözeltiler</span>
+            </div>
+            <div class="q-body">
+                <div class="q-text">0,0165 M $Al_{2}(SO_{4})_{3}(aq)$ çözeltisinde aluminyum ve sülfat iyonları derişimleri nedir?</div>
+                <div class="step">
+                    <strong>1. Ayrışma Denklemi:</strong>
+                    Tuz suda tamamen iyonlaşır:
+                    $$ Al_2(SO_4)_3 \rightarrow 2Al^{3+} + 3SO_4^{2-} $$
+                </div>
+                <div class="step">
+                    <strong>2. Stokiyometrik Hesap:</strong>
+                    1 mol tuzdan 2 mol Al ve 3 mol Sülfat gelir.
+                    <br> $[Al^{3+}] = 2 \times 0,0165 = 0,0330 \, M$
+                    <br> $[SO_4^{2-}] = 3 \times 0,0165 = 0,0495 \, M$
+                </div>
+                <div class="answer-box">Cevap: $[Al^{3+}]=0,0330 M$, $[SO_4^{2-}]=0,0495 M$</div>
             </div>
         </div>
-        
-         <div class="exam-section">
-            <h3>Bölüm V: Lineer Dönüşümler ve Özdeğerler (20 Puan)</h3>
-            <div class="question-box">
-                <strong>Soru 14.</strong> $A = \begin{pmatrix} 1 & 2 \\ 4 & 9 \end{pmatrix}$ matrisi için özdeğerleri ve özvektörleri bulunuz, matrisi köşegenleştiriniz.
+
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 2: Kimyasal Denge Hesaplaması [cite: 5, 6, 7, 8]</span>
+                <span class="q-tag">Denge</span>
+            </div>
+            <div class="q-body">
+                <div class="q-text">$N_{2}O_{4} \rightleftharpoons 2NO_{2}$. Başlangıç: 0,0240 mol $N_2O_4$, Hacim: 0,372 L, $K_c=4,61\times10^{-3}$. (a) Denge miktarları, (b) Ayrışma yüzdesi?</div>
+                <div class="step">
+                    <strong>1. Başlangıç Molaritesi:</strong>
+                    $M = \frac{n}{V} = \frac{0,0240}{0,372} \approx 0,0645 \, M$
+                </div>
+                <div class="step">
+                    <strong>2. ICE (Değişim) Tablosu:</strong>
+                    $$
+                    \begin{array}{lccc}
+                     & N_2O_4 & \rightleftharpoons & 2NO_2 \\
+                    \text{I (Başlangıç)} & 0,0645 & & 0 \\
+                    \text{C (Değişim)} & -x & & +2x \\
+                    \text{E (Denge)} & 0,0645-x & & 2x
+                    \end{array}
+                    $$
+                </div>
+                <div class="step">
+                    <strong>3. Hesaplama ($K_c$):</strong>
+                    $4,61\times10^{-3} = \frac{(2x)^2}{0,0645-x}$
+                    <br>Bu ikinci dereceden denklem çözüldüğünde: $x \approx 0,00806$ bulunur.
+                </div>
+                <div class="answer-box">
+                    (a) Denge $N_2O_4$: $0,0645 - 0,00806 = 0,0564 \, M$<br>
+                    (b) Ayrışma Yüzdesi: $\frac{0,00806}{0,0645} \times 100 \approx \%12,5$
+                </div>
             </div>
         </div>
-    </section>
 
-    <section>
-        <h2>4. Ayrıntılı Çözüm Anahtarı ve Akademik Analiz</h2>
-
-        <h3>Bölüm I Çözümleri</h3>
-        <div class="solution-box">
-            <span class="solution-header">Çözüm 1: YANLIŞ</span>
-            <p><strong>Analiz:</strong> Lineer bağımlı bir kümede en az bir vektör diğerlerinin kombinasyonudur, ancak bu her vektör için geçerli değildir. <br>
-            <strong>Karşı Örnek:</strong> $\mathbf{v}_1=(1,0), \mathbf{v}_2=(2,0), \mathbf{v}_3=(0,1)$. Küme bağımlıdır ama $\mathbf{v}_3$, $\mathbf{v}_1$ ve $\mathbf{v}_2$ cinsinden yazılamaz.</p>
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 3: Molekül Geometrisi ve Formal Yük [cite: 9]</span>
+                <span class="q-tag">Lewis & Geometri</span>
+            </div>
+            <div class="q-body">
+                <div class="q-text">$ClO_{3}^{-}$ iyonunun en kararlı geometrisi ve merkez atomun formal yükü?</div>
+                <div class="step">
+                    <strong>1. Lewis Yapısı:</strong>
+                    Toplam Değerlik Elektronu: $7 (Cl) + 3\times6 (O) + 1 (yük) = 26 e^-$.
+                    <br>Cl merkezde, 3 Oksijen bağlı ve Cl üzerinde 1 ortaklanmamış elektron çifti (lone pair) var.
+                </div>
+                <div class="step">
+                    <strong>2. Geometri:</strong>
+                    VSEPR: $AX_3E_1$ (3 bağ, 1 çift).
+                    <br> Elektron Geometrisi: Tetrahedral.
+                    <br> <strong>Molekül Geometrisi: Üçgen Piramit (Trigonal Pyramidal).</strong>
+                </div>
+                <div class="step">
+                    <strong>3. Formal Yük (Merkez Cl):</strong>
+                    En kararlı yapıda (oktet genişlemesi ile çift bağlar oluşabilir), ancak temel yapıda hesaplarsak:
+                    <br> Formal Yük = Grup No - (Bağ sayısı + Nokta sayısı)
+                    <br> 2 çift bağ 1 tek bağ varsayımıyla (en kararlı, formal yükü minimize eden): $7 - (5 + 2) = 0$.
+                </div>
+                <div class="answer-box">Geometri: Üçgen Piramit, Formal Yük (En kararlı): 0</div>
+            </div>
         </div>
 
-        <div class="solution-box">
-            <span class="solution-header">Çözüm 2: YANLIŞ</span>
-            <p><strong>Analiz:</strong> IMT gereği, $A\mathbf{x} = \mathbf{0}$ aşikar olmayan bir çözüme sahipse matris singülerdir ($\det(A)=0$). Bu durumda sütunlar tüm uzayı germez, dolayısıyla her $\mathbf{b}$ için çözüm yoktur.</p>
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 4: Tuz Hidrolizi [cite: 10]</span>
+                <span class="q-tag">Asit-Baz</span>
+            </div>
+            <div class="q-body">
+                <div class="q-text">0,1 M NaF çözeltisinin pH'ı? (HF için $K_a=6,6\times10^{-4}$)</div>
+                <div class="step">
+                    <strong>1. Analiz:</strong> NaF bazik bir tuzdur ($F^-$ hidroliz olur).
+                    <br> $F^- + H_2O \rightleftharpoons HF + OH^-$
+                </div>
+                <div class="step">
+                    <strong>2. $K_b$ Bulma:</strong>
+                    $K_b = \frac{K_{su}}{K_a} = \frac{10^{-14}}{6,6\times10^{-4}} \approx 1,51\times10^{-11}$
+                </div>
+                <div class="step">
+                    <strong>3. $OH^-$ Derişimi:</strong>
+                    $x = \sqrt{K_b \times C} = \sqrt{1,51\times10^{-11} \times 0,1} \approx 1,23\times10^{-6} M$
+                </div>
+                <div class="step">
+                    <strong>4. pH Hesabı:</strong>
+                    $pOH = -\log(1,23\times10^{-6}) \approx 5,91$
+                    <br> $pH = 14 - 5,91 = 8,09$
+                </div>
+                <div class="answer-box">Cevap: pH = 8,09</div>
+            </div>
         </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 5: Yanma Tepkimesi ve Gazlar [cite: 11, 12]</span>
+                <span class="q-tag">Stokiyometri & Gazlar</span>
+            </div>
+            <div class="q-body">
+                <div class="q-text">5.60 g $C_{6}H_{12}O_{6}$ ($37^\circ C$, 1 atm) yandığında oluşan $CO_2$ hacmi?</div>
+                <div class="step">
+                    <strong>1. Mol Hesabı:</strong>
+                    Glikoz MA = 180 g/mol.
+                    <br> $n = \frac{5,60}{180} \approx 0,0311$ mol Glikoz.
+                </div>
+                <div class="step">
+                    <strong>2. Stokiyometri:</strong>
+                    Denklem: $1 C_{6}H_{12}O_{6} \rightarrow 6 CO_2$.
+                    <br> $n_{CO_2} = 6 \times 0,0311 = 0,1866$ mol.
+                </div>
+                <div class="step">
+                    <strong>3. İdeal Gaz Yasası ($PV=nRT$):</strong>
+                    $T = 37 + 273 = 310 K$.
+                    <br> $V = \frac{nRT}{P} = \frac{0,1866 \times 0,08206 \times 310}{1,0}$
+                    <br> $V \approx 4,75$ Litre.
+                </div>
+                <div class="answer-box">Cevap: ~4,75 Litre</div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 6: NF3 Analizi [cite: 13]</span>
+                <span class="q-tag">Hibritleşme</span>
+            </div>
+            <div class="q-body">
+                <div class="q-text">$NF_3$ Lewis yapısı, hibritleşme ve geometri?</div>
+                <div class="step">
+                    <strong>1. Lewis:</strong> N (5A) + 3*F (7A) = 26 $e^-$. N merkezde, bir ortaklanmamış çift var.
+                </div>
+                <div class="step">
+                    <strong>2. Hibritleşme:</strong> N atomu 3 bağ + 1 lone pair = 4 doğrultu. $\rightarrow sp^3$.
+                </div>
+                <div class="step">
+                    <strong>3. Geometri:</strong> $AX_3E_1$ yapısı. Üçgen Piramit.
+                </div>
+                <div class="answer-box">Hibritleşme: $sp^3$, Geometri: Üçgen Piramit</div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 7: Kçç ve Elektrokimya [cite: 14]</span>
+                <span class="q-tag">Elektrokimya (Zor)</span>
+            </div>
+            <div class="q-body">
+                <div class="q-text">$E_{pil}=0,417 V$. Ag elektrotla $AgI(k/aq)$ süspansiyonu. $K_{sp}=?$</div>
+                <div class="strategy-box">
+                    <strong>Konu Anlatımı:</strong> Bu bir derişim pilidir. Katot standart hidrojen değil, standart Gümüş elektrot (1M $Ag^+$) varsayılır. Anot ise doymuş AgI çözeltisidir.
+                </div>
+                <div class="step">
+                    <strong>1. Nernst Eşitliği:</strong>
+                    $E_{hücre} = 0 - 0,0592 \log([Ag^+]_{anot} / 1M)$
+                    <br> $0,417 = -0,0592 \log [Ag^+]$
+                    <br> $\log [Ag^+] = -7,044 \rightarrow [Ag^+] \approx 9,0 \times 10^{-8} M$
+                </div>
+                <div class="step">
+                    <strong>2. Kçç Hesabı:</strong>
+                    Doymuş çözeltide $[Ag^+] = [I^-]$.
+                    <br> $K_{sp} = (9,0 \times 10^{-8})^2 \approx 8,1 \times 10^{-15}$
+                </div>
+                <div class="answer-box">Cevap: $K_{sp} \approx 8,1 \times 10^{-15}$</div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 8: Kısmi Basınçlar [cite: 15, 16]</span>
+                <span class="q-tag">Gazlar</span>
+            </div>
+            <div class="q-body">
+                <div class="q-text">Toplam basınç 1,05 atm. %15,1 $O_2$, %4,8 $CO_2$, %75 $N_2$, %5,1 $H_2O$. mmHg cinsinden kısmi basınçlar?</div>
+                <div class="step">
+                    <strong>Formül:</strong> $P_i = Yüzde \times P_{toplam} \times 760 (atm \rightarrow mmHg)$
+                </div>
+                <div class="step">
+                    $P_{O_2} = 0,151 \times 1,05 \times 760 \approx 120,5$ mmHg <br>
+                    $P_{CO_2} = 0,048 \times 1,05 \times 760 \approx 38,3$ mmHg <br>
+                    $P_{N_2} = 0,750 \times 1,05 \times 760 \approx 598,5$ mmHg <br>
+                    $P_{H_2O} = 0,051 \times 1,05 \times 760 \approx 40,7$ mmHg
+                </div>
+                <div class="answer-box">Sonuçlar yukarıdadır.</div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 9 & 10: Adlandırma ve Formül Yazma [cite: 17-28]</span>
+                <span class="q-tag">Nomenklatür</span>
+            </div>
+            <div class="q-body">
+                <table class="nomenclature">
+                    <tr><th>Bileşik / İsim</th><th>Cevap</th></tr>
+                    <tr><td>Na$_2$S</td><td>Sodyum sülfür</td></tr>
+                    <tr><td>B$_2$Br$_4$</td><td>Dibork tetrabromür</td></tr>
+                    <tr><td>Mg(ClO$_3$)$_2$</td><td>Magnezyum klorat</td></tr>
+                    <tr><td>SrSO$_3$</td><td>Stronsiyum sülfit</td></tr>
+                    <tr><td>SnI$_2$</td><td>Kalay(II) iyodür</td></tr>
+                    <tr><td>Dikloroetan</td><td>C$_2$H$_4$Cl$_2$</td></tr>
+                    <tr><td>Alüminyum klorür</td><td>AlCl$_3$</td></tr>
+                    <tr><td>Benzen</td><td>C$_6$H$_6$</td></tr>
+                    <tr><td>Baryum klorat</td><td>Ba(ClO$_3$)$_2$</td></tr>
+                    <tr><td>Sodyum tiyosülfat</td><td>Na$_2$S$_2$O$_3$</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 11: Rezonans Yapıları [cite: 29-35]</span>
+                <span class="q-tag">Organik Kimya</span>
+            </div>
+            <div class="q-body">
+                <div class="q-text">Verilen organik moleküllerin rezonans yapıları.</div>
+                <div class="strategy-box">
+                    <strong>Konu Anlatımı:</strong> Rezonans, pi elektronlarının ($ \pi $) veya ortaklanmamış elektron çiftlerinin molekül içinde yer değiştirmesidir. Atomların yeri değişmez, sadece elektronlar hareket eder.
+                    <br> Örneğin: CH$_2$=CH-CH$_2^+$ yapısında çift bağ pozitif yüke doğru kayar ve yük diğer uca geçer: $^+CH_2-CH=CH_2$.
+                </div>
+                <div class="answer-box">İpucu: Çift bağları tek bağa, tek bağları çift bağa dönüştürürken yükleri uç karbonlara taşıyın.</div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 12: Lewis Yapıları ve İstisnalar [cite: 36-40]</span>
+                <span class="q-tag">Lewis</span>
+            </div>
+            <div class="q-body">
+                <div class="step">
+                    <strong>a) BeF$_2$:</strong> Be oktet boşluğu yaşar (4 $e^-$ ile kararlıdır). Doğrusal yapı. F-Be-F. Formal yükler 0.
+                </div>
+                <div class="step">
+                    <strong>b) BCl$_3$:</strong> Bor oktet boşluğu yaşar (6 $e^-$). Düzlem üçgen yapı.
+                </div>
+                <div class="step">
+                    <strong>c) CCl$_4$:</strong> Tam oktet. Tetrahedral.
+                </div>
+                <div class="step">
+                    <strong>d) PBr$_5$:</strong> Fosfor oktet genişlemesi yapar (10 $e^-$). Üçgen çift piramit.
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 13: Reaksiyon Tamamlama [cite: 41, 42]</span>
+                <span class="q-tag">Stokiyometri</span>
+            </div>
+            <div class="q-body">
+                <div class="q-text">Tepkime: $Ce_{2}O_{3}+NH_{4}Cl \rightarrow CeCl_{3}+H_{2}O+NH_{3}$. 8.94 mol su oluşursa kaç g amonyak oluşur?</div>
+                <div class="step">
+                    <strong>1. Denkleştirme:</strong>
+                    $Ce_2O_3 + 6NH_4Cl \rightarrow 2CeCl_3 + 3H_2O + 6NH_3$
+                    <br> Katsayılar: Su (3) ve Amonyak (6). Oran 1:2.
+                </div>
+                <div class="step">
+                    <strong>2. Mol Hesabı:</strong>
+                    8.94 mol $H_2O \times \frac{6 mol NH_3}{3 mol H_2O} = 17,88$ mol $NH_3$.
+                </div>
+                <div class="step">
+                    <strong>3. Kütle Hesabı:</strong>
+                    $NH_3$ MA = 17 g/mol.
+                    <br> $m = 17,88 \times 17 \approx 304$ gram.
+                </div>
+                <div class="answer-box">Cevap: ~304 g Amonyak</div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 14: Asitlik Karşılaştırması [cite: 43]</span>
+                <span class="q-tag">Asitlik</span>
+            </div>
+            <div class="q-body">
+                <div class="q-text">Asetik asit ($CH_3COOH$) vs Etanol ($CH_3CH_2OH$). Hangisi daha asidik?</div>
+                <div class="strategy-box">
+                    <strong>Açıklama:</strong> Asetik asit daha kuvvetli asittir. Nedeni "Rezonans Kararlılığı"dır. Asetik asit proton verdiğinde oluşan asetat iyonunda ($CH_3COO^-$), negatif yük iki oksijen atomu arasında paylaşılır (rezonans). Etoksit iyonunda ($CH_3CH_2O^-$) yük tek bir oksijene hapsolur ve kararsızdır.
+                </div>
+                <div class="answer-box">Cevap: Asetik asit (Rezonans kararlılığı nedeniyle).</div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 15: Anilin Rezonansı [cite: 44]</span>
+                <span class="q-tag">Organik</span>
+            </div>
+            <div class="q-body">
+                <div class="q-text">Anilin'in rezonans yapıları.</div>
+                <div class="step">
+                    Anilin ($C_6H_5NH_2$), azot üzerindeki ortaklanmamış elektron çiftini benzen halkasına aktarır. Bu durum halkayı aktive eder ve orto/para pozisyonlarında negatif yük yoğunluğu oluşturur. 5 adet rezonans yapısı çizilmelidir.
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                [cite_start]<span>Soru 16: Nitrat İyonu Analizi [cite: 45-53]</span>
+                <span class="q-tag">Genel Tekrar</span>
+            </div>
+            <div class="q-body">
+                <div class="q-text">Nitrat ($NO_3^-$) için tam analiz.</div>
+                <ul style="list-style: none; padding: 0;">
+                    <li class="step"><strong>a) Lewis:</strong> N merkezde, 3 O bağlı. Toplam 24 $e^-$. 1 çift bağ, 2 tek bağ.</li>
+                    <li class="step"><strong>b) Bağ Açısı:</strong> Düzlem üçgen yapı olduğu için tam 120 derece.</li>
+                    <li class="step"><strong>c) Hibritleşme:</strong> $sp^2$ (3 doğrultu).</li>
+                    <li class="step"><strong>d) Geometri:</strong> Düzlem Üçgen (Trigonal Planar).</li>
+                    <li class="step"><strong>e) Bağ Sayıları:</strong> 3 sigma ($\sigma$) ve 1 pi ($\pi$) bağı (rezonansla dağılır).</li>
+                    <li class="step"><strong>f) Bağ Derecesi:</strong> Toplam 4 bağ / 3 yön = 1.33.</li>
+                    <li class="step"><strong>g) Rezonans:</strong> Çift bağın her üç oksijenle de olabildiği 3 eşdeğer yapı vardır.</li>
+                    <li class="step"><strong>h) Polarite:</strong> Molekül simetrik (Düzlem üçgen) olduğu için dipol momentler birbirini götürür. <strong>Apolardır.</strong> (İyonun kendisi yüklüdür ama moleküler geometri açısından apolar özellik gösterir).</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="study-plan" class="card">
+        <h2 class="section-title">📅 Sıfırdan Zirveye Çalışma Rehberi</h2>
+        <p>Aralık 2025 finali için optimize edilmiş, konuları önceliklendiren çalışma programı.</p>
         
-        <div class="solution-box">
-            <span class="solution-header">Çözüm 3: YANLIŞ</span>
-            <p><strong>Analiz:</strong> Sıfır vektörünün uzunluğu 0'dır, dolayısıyla $W$ kümesinde yer almaz. Alt uzay olması için $\mathbf{0} \in W$ şarttır.</p>
-        </div>
-
-        <h3>Bölüm II Çözümleri</h3>
-        <div class="solution-box">
-            <span class="solution-header">Çözüm 7: Sistem Çözümü</span>
-            <p><strong>b) Determinant:</strong><br>
-            $\det(A) = 1(-15+1) - 2(-6+1) - 1(2-5) = -14 + 10 + 3 = -1 \neq 4$ (Not: Metindeki örnekte determinant 4 olarak belirtilmişti, kofaktör hesabını dikkatli yapınız). <br>
-            <em>Düzeltme:</em> Rapor metninde $1(-14) - 2(-5) - 1(-3) = -14 + 10 + 3 = -1$.
-            </p>
-            <p><strong>c) Ters Matris İşlemleri:</strong><br>
-            Gauss-Jordan ile $[A|I] \to [I|A^{-1}]$ indirgemesi yapılır.
-            </p>
-            <p><strong>d) Sonuç:</strong> $\mathbf{x} = A^{-1}\mathbf{b}$ hesaplanır. Rapor verisine göre: $x_1=21, x_2=1, x_3=-11$.</p>
-        </div>
-        
-        <div class="solution-box">
-            <span class="solution-header">Çözüm 9: Determinant Özellikleri</span>
-            <p>Verilen $\det(A) = 3$, $n=4$.</p>
-            <ul>
-                <li>a) $\det(-A) = (-1)^4 \det(A) = 1 \cdot 3 = 3$.</li>
-                <li>b) $\det(A^T) = 3$.</li>
-                <li>c) $\det(2A) = 2^4 \det(A) = 16 \cdot 3 = 48$.</li>
-                <li>d) $\det(A^{-1}) = 1/3$.</li>
-            </ul>
-        </div>
-
-        <h3>Bölüm III Çözümleri</h3>
-        <div class="solution-box">
-            <span class="solution-header">Çözüm 10: Polinom Uzayları</span>
-            <p><strong>Taban Bulma:</strong> $p(x) \in P_2$ ve $p(2)=0$ olmalı.<br>
-            $p(x) = a(x^2-4) + b(x-2)$ formundadır. <br>
-            Taban: $\{ x^2-4, x-2 \}$. Boyut 2'dir.</p>
-        </div>
-
-        <h3>Bölüm IV Çözümleri</h3>
-        <div class="solution-box">
-            <span class="solution-header">Çözüm 12: Gram-Schmidt</span>
-            <p>$\mathbf{v}_1 = (1, 2, 0)^T$.<br>
-            $\mathbf{v}_2 = \mathbf{x}_2 - \text{proj}_{\mathbf{v}_1}\mathbf{x}_2$.<br>
-            İç çarpım: $8(1) + 1(2) + 0 = 10$. Norm kare: $1^2+2^2=5$. Katsayı: $10/5=2$.<br>
-            $\mathbf{v}_2 = (8, 1, -6) - 2(1, 2, 0) = (6, -3, -6)$.</p>
-        </div>
-        
-        <h3>Bölüm V Çözümleri</h3>
-        <div class="solution-box">
-            <span class="solution-header">Çözüm 14: Köşegenleştirme</span>
-            <p>Karakteristik denklem: $\lambda^2 - 10\lambda + 1 = 0$.<br>
-            $\lambda_{1,2} = 5 \pm 2\sqrt{6}$.<br>
-            Özvektörler bulunarak $P$ matrisi oluşturulur ve $A = PDP^{-1}$ yazılır.</p>
-        </div>
-
-    </section>
-
-    <section>
-        <h2>5. Kavramsal Özet Tabloları</h2>
-        
-        <h3>Tablo 1: Alt Uzay Kontrol Listesi</h3>
-        <table>
+        <table class="study-table">
             <thead>
                 <tr>
-                    <th>Kriter</th>
-                    <th>Açıklama</th>
-                    <th>Yaygın Hata</th>
+                    <th style="width: 15%">Öncelik</th>
+                    <th style="width: 25%">Konu Başlığı</th>
+                    <th>Yapılacaklar & Kritik Noktalar</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Sıfır Vektörü</td>
-                    <td>$\mathbf{0} \in W$ olmalıdır.</td>
-                    <td>$\{\mathbf{x} : \|\mathbf{x}\| = 1\}$ (Sıfır yok)</td>
+                    <td><strong>1. Gün</strong></td>
+                    <td>Temel Hesaplamalar</td>
+                    <td>
+                        <ul style="margin: 0; padding-left: 1.2rem; list-style-type: disc;">
+                            <li>Mol ve Molarite (Soru 1).</li>
+                            <li>Tepkime Denkleştirme ve Stokiyometri (Soru 5, 13).</li>
+                            <li>Formül yazma ve Adlandırma kurallarını ezberle (Soru 9, 10).</li>
+                        </ul>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Toplam Kapalılığı</td>
-                    <td>$\mathbf{u}+\mathbf{v} \in W$</td>
-                    <td>I. Çeyrek vektörleri (toplamda korunur ama çıkarma/negatifle bozulur)</td>
+                    <td><strong>2. Gün</strong></td>
+                    <td>Yapı ve Bağlar</td>
+                    <td>
+                        <ul style="margin: 0; padding-left: 1.2rem; list-style-type: disc;">
+                            <li>Lewis yapıları, Formal Yük ve VSEPR Geometrisi (Soru 3, 6, 12, 16).</li>
+                            <li>Rezonans kavramını (Anilin, Asetat, Nitrat) iyi kavra (Soru 11, 14, 15).</li>
+                        </ul>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Skaler Kapalılığı</td>
-                    <td>$c\mathbf{u} \in W$</td>
-                    <td>Tamsayı koordinatlar (Skaler $\pi$ olursa bozulur)</td>
+                    <td><strong>3. Gün</strong></td>
+                    <td>Denge ve Sistemler</td>
+                    <td>
+                        <ul style="margin: 0; padding-left: 1.2rem; list-style-type: disc;">
+                            <li>ICE Tablosu ile $K_c$ hesaplama (Soru 2).</li>
+                            <li>Tuz hidrolizi ve pH (Soru 4).</li>
+                            <li>Gaz yasaları ve Kısmi Basınç (Soru 8).</li>
+                            <li>Nernst Eşitliği (Soru 7).</li>
+                        </ul>
+                    </td>
                 </tr>
             </tbody>
         </table>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 Matematik Bölümü - İleri Lineer Cebir Değerlendirme Raporu</p>
-    </footer>
-
+    </div>
 </div>
 
+<footer>
+    <p>© 2025-2026 Akademik Başarı Asistanı | Tüm Hakları Saklıdır.</p>
+</footer>
+
 </body>
-          </html>
-          
+</html>
